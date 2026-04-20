@@ -431,6 +431,20 @@
     color: white;
   }
 
+  .btn-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-guma.hidden-guma {
+    background: var(--gold);
+    color: white;
+    border-color: var(--gold);
+  }
+
   /* ===== CHERRY BLOSSOMS ===== */
   .petal {
     position: fixed;
@@ -484,7 +498,7 @@
     }
 
     .sig-name { font-size: 1.3rem; }
-    .btn-replay { font-size: 0.78rem; padding: 7px 20px; }
+    .btn-replay { font-size: 0.78rem; padding: 7px 16px; }
 
     #main { padding: 20px 12px 40px; }
   }
@@ -531,7 +545,7 @@
         <div class="photo"><img src="photo3.jpg" alt="Đan Lê" style="object-position:center 20%;"></div>
         <div class="photo"><img src="photo4.jpg" alt="Đan Lê" style="object-position:center top;"></div>
       </div>
-      <img src="guma.jpg" class="cat-mascot" alt="Guma" onerror="this.style.display='none'">
+      <img src="guma.jpg" class="cat-mascot" id="gumaImg" alt="Guma" onerror="this.style.display='none'">
     </div>
 
     <div class="message-box">
@@ -559,7 +573,10 @@
       <div class="sig-name" id="senderName">Người bạn thân 💕</div>
     </div>
 
-    <button class="btn-replay" onclick="replayFireworks()">🎆 Pháo hoa lần nữa!</button>
+    <div class="btn-row">
+      <button class="btn-replay" onclick="replayFireworks()">🎆 Pháo hoa!</button>
+      <button class="btn-replay btn-guma" id="btnGuma" onclick="toggleGuma()">🐱 Ẩn Guma</button>
+    </div>
   </div>
 </div>
 
@@ -696,6 +713,16 @@ function openLetter() {
 
 function replayFireworks() {
   autoFireworks();
+}
+
+function toggleGuma() {
+  const img = document.getElementById('gumaImg');
+  const btn = document.getElementById('btnGuma');
+  if (!img) return;
+  const isVisible = img.style.display !== 'none';
+  img.style.display = isVisible ? 'none' : '';
+  btn.textContent = isVisible ? '🐱 Hiện Guma' : '🐱 Ẩn Guma';
+  btn.classList.toggle('hidden-guma', !isVisible);
 }
 
 // Click anywhere on splash to open
